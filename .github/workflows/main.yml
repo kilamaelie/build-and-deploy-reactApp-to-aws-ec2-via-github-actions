@@ -1,6 +1,8 @@
 name: Continuous Integration and Delivery
 
-on: [push]
+on:
+  push:
+    branches: [main]
 
 env:
   #
@@ -43,13 +45,14 @@ jobs:
           docker push ${{ env.NGINX_IMAGE }}
 
   checking-secrets:
+    name: Checking secrets
     runs-on: ubuntu-latest
     environment: CI
     needs: build
     outputs:
       secret_key_exists: ${{steps.secret_key_exists.outputs.defined}}
     steps:
-      - name: Check for Secret availability
+      - name: Check for Secrets availabilities
         shell: bash
         run: |
           if [ "${{ secrets.PRIVATE_KEY }}" != '' && "${{secrets.AWS_EC2_IP_ADDRESS}}" !='' && ${{secrets.AWS_HOST_USER}}  ]; then
@@ -63,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: CI
     needs: checking-secrets
-    if: github.ref=='refs/heads/main' && needs.checking-secrets.outputs.secret_key_exists =='true'
+    if: needs.checking-secrets.outputs.secret_key_exists =='true'
     steps:
       - name: Checkout main
         uses: actions/checkout@v1
