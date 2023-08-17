@@ -95,7 +95,7 @@ jobs:
         run: |
           scp -o StrictHostKeyChecking=no -r ./.env ./docker-compose.prod.yml ${{secrets.AWS_HOST_USER}}@${{ secrets.AWS_EC2_IP_ADDRESS }}:
           ssh -o StrictHostKeyChecking=no ${{secrets.AWS_HOST_USER}}@${{ secrets.AWS_EC2_IP_ADDRESS }} << EOF
-              docker login ghcr.io -u ${NAMESPACE -p $PERSONAL_ACCESS_TOKEN
+              docker login ghcr.io -u $NAMESPACE -p $PERSONAL_ACCESS_TOKEN
               docker pull $WEBSITE_IMAGE
               docker pull $NGINX_IMAGE 
               docker-compose -f --env-file=.env docker-compose.prod up -d
