@@ -67,7 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: CI
     needs: checking-secrets
-    if: needs.checking-secrets.outputs.secret_key_exists == 'true'
+    if: ${{ needs.checking-secrets.outputs.secret_key_exists == 'true' }}
     steps:
       - name: Checkout main
         uses: actions/checkout@v1
@@ -93,10 +93,9 @@ jobs:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
         run: |
-          scp -o StrictHostKeyChecking=no -r ./.env ./docker-compose.prod.yml ${{secrets.AWS_HOST_USER}}@${{ secrets.AWS_EC2_IP_ADDRESS }}:/react-tutorial-app
+          scp -o StrictHostKeyChecking=no -r ./.env ./docker-compose.prod.yml ${{secrets.AWS_HOST_USER}}@${{ secrets.AWS_EC2_IP_ADDRESS }}:
           ssh -o StrictHostKeyChecking=no ${{secrets.AWS_HOST_USER}}@${{ secrets.AWS_EC2_IP_ADDRESS }} << 'ENDSSH'
-              cd /react-tutorial-app
-              docker login ghcr.io -u $NAMESPACE -p $PERSONAL_ACCESS_TOKEN
+              docker login ghcr.io -u ${NAMESPACE -p $PERSONAL_ACCESS_TOKEN
               docker pull $WEBSITE_IMAGE
               docker pull $NGINX_IMAGE 
               docker-compose -f --env-file=.env docker-compose.prod up -d
