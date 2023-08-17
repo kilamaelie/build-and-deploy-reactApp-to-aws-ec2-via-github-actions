@@ -55,7 +55,7 @@ jobs:
       - name: Check for Secrets availabilities
         shell: bash
         run: |
-          if [ "${{ secrets.PRIVATE_KEY }}" != '' && "${{secrets.AWS_EC2_IP_ADDRESS}}" !='' && ${{secrets.AWS_HOST_USER}}  ]; then
+          if [ "${{ secrets.PRIVATE_KEY }}" != '' && "${{secrets.AWS_EC2_IP_ADDRESS}}" !='' && "${{secrets.AWS_HOST_USER}}" !=''  ]; then
             echo "defined=true" >> $GITHUB_OUTPUT;
           else
             echo "defined=false" >> $GITHUB_OUTPUT;
