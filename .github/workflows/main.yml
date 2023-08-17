@@ -56,11 +56,10 @@ jobs:
         id: check_secrets
         shell: bash
         run: |
-          if [  "${{ secrets.PRIVATE_KEY }}" !='' && "${{secrets.AWS_EC2_IP_ADDRESS}}" !='' && "${{secrets.AWS_HOST_USER}}" !=''  ]; then
-            echo "defined=true" >> $GITHUB_OUTPUT;
-            echo ${{steps.check_secrets.outputs.defined}}
+          if [[ -n "${{ secrets.PRIVATE_KEY }}" && -n "${{secrets.AWS_EC2_IP_ADDRESS}}" && -n "${{secrets.AWS_HOST_USER}}" ]]; then
+           echo "::set-output name=secret_key_exists::true"
           else
-            echo "defined=false" >> $GITHUB_OUTPUT;
+            echo "::set-output name=secret_key_exists::false"
           fi
 
   deploy:
