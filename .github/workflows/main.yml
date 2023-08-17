@@ -66,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: CI
     needs: checking-secrets
-    if: needs.checking-secrets.outputs.secret_key_exists =='true'
+    if: needs.checking-secrets.outputs.secret_key_exists == true
     steps:
       - name: Checkout main
         uses: actions/checkout@v1
