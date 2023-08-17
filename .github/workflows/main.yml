@@ -57,9 +57,9 @@ jobs:
         shell: bash
         run: |
           if [[ -n "${{ secrets.PRIVATE_KEY }}" && -n "${{secrets.AWS_EC2_IP_ADDRESS}}" && -n "${{secrets.AWS_HOST_USER}}" ]]; then
-           echo "::set-output name=secret_key_exists::true"
+            echo "defined=true" >> $GITHUB_OUTPUT;
           else
-            echo "::set-output name=secret_key_exists::false"
+            echo "defined=false" >> $GITHUB_OUTPUT;
           fi
 
   deploy:
