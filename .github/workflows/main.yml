@@ -50,7 +50,7 @@ jobs:
     environment: CI
     needs: build
     outputs:
-      secret_key_exists: ${{steps.check_secrets.secret_key_exists.outputs.defined}}
+      secret_key_exists: ${{steps.check_secrets.outputs.defined}}
     steps:
       - name: Check for Secrets availabilities
         id: check_secrets
@@ -58,7 +58,7 @@ jobs:
         run: |
           if [  "${{ secrets.PRIVATE_KEY }}" !='' && "${{secrets.AWS_EC2_IP_ADDRESS}}" !='' && "${{secrets.AWS_HOST_USER}}" !=''  ]; then
             echo "defined=true" >> $GITHUB_OUTPUT;
-            echo ${{steps.check_secrets.secret_key_exists.outputs.defined}}
+            echo ${{steps.check_secrets.outputs.defined}}
           else
             echo "defined=false" >> $GITHUB_OUTPUT;
           fi
