@@ -98,5 +98,5 @@ jobs:
               docker login ghcr.io -u $NAMESPACE -p $PERSONAL_ACCESS_TOKEN
               docker pull $WEBSITE_IMAGE
               docker pull $NGINX_IMAGE 
-              docker-compose -f --env-file=.env docker-compose.prod.yml up -d
+              docker-compose --env-file=.env -f docker-compose.prod.yml up -d
           EOF
