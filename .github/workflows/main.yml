@@ -57,6 +57,7 @@ jobs:
         run: |
           if [ "${{ secrets.PRIVATE_KEY }}" != '' && "${{secrets.AWS_EC2_IP_ADDRESS}}" !='' && "${{secrets.AWS_HOST_USER}}" !=''  ]; then
             echo "defined=true" >> $GITHUB_OUTPUT;
+            echo ${{steps.secret_key_exists.outputs.defined}}
           else
             echo "defined=false" >> $GITHUB_OUTPUT;
           fi
