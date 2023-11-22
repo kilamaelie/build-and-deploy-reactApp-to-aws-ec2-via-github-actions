@@ -14,7 +14,7 @@ Let's get started on our journey !!
 
 ---
 
-check out the [blog](https://medium.com/@kilama)
+check out my [blogs](https://medium.com/@kilamaelie)
 
 ## How to use this project?
 
@@ -32,4 +32,4 @@ Verify it on [http//localhost:3000/](http//localhost:3000/)
 
 ### CI and Production
 
-See the blog post on [Build and Deploy a ReactJS App to AWS EC2 with Docker, NGINX, and Automate with GitHub Actions.](https://medium.com/@kilama/build-and-deploy-a-reactjs-app-to-aws-ec2-with-docker-nginx-and-automate-with-github-actions-d8c57fb47967)
+See the blog post on [Build and Deploy a ReactJS App to AWS EC2 with Docker, NGINX, and Automate with GitHub Actions.](https://medium.com/@kilamaelie/build-and-deploy-a-reactjs-app-to-aws-ec2-with-docker-nginx-and-automate-with-github-actions-d8c57fb47967)
