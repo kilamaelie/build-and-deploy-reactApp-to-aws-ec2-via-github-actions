@@ -3,3 +3,4 @@
 
 echo Pre-commit checks
 echo Run your test before commiting
+echo Well done
