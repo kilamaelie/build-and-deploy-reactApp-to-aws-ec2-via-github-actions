@@ -40,11 +40,6 @@ jobs:
         run: |
           docker-compose -f docker-compose.ci.yml build 2>error >&1
 
-      - name: Push images
-        run: |
-          docker push ${{ env.WEBSITE_IMAGE }}
-          docker push ${{ env.NGINX_IMAGE }}
-
       - name: create an issue
         if: ${{ failure() }}
         run: |
@@ -56,9 +51,14 @@ jobs:
           --header 'content-type: application/json' \
           --data '{
             "title": "Automated issue for a commit: ${{ github.job }}",
-            "body": "## Description\n\nThis issue was automatically created by the GitHub Action.\n\nThe Job **`${{github.job}}`** of the workflow run **`${{github.run_number}}`** failed with the following error:\n\n`'"$ERROR"'`\n\n## Run details\n\n- Workflow: `${{ github.workflow }}`\n\n- The actor of the run: `${{ github.triggering_actor }}`\n\n- The commit hash was: _${{ github.sha }}_\n\nKindly fix it in the shortest time possible.\n\nThank you."
+            "body": "## Description\n\n This issue was automatically created by the GitHub Action.\n\nThe Job **`${{github.job}}`** of the workflow run **`${{github.run_number}}`** failed with the following error:\n\n`'"$ERROR"'`\n\n## Run details\n\n- Workflow: `${{ github.workflow }}`\n\n- The actor of the run: `${{ github.triggering_actor }}`\n\n- The commit hash was: _${{ github.sha }}_\n\nKindly fix it in the shortest time possible.\n\nThank you."
             }' \
           --fail
+
+      - name: Push images
+        run: |
+          docker push ${{ env.WEBSITE_IMAGE }}
+          docker push ${{ env.NGINX_IMAGE }}
 
   checking-secrets:
     name: Checking secrets
