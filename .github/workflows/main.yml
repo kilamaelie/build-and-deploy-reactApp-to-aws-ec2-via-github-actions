@@ -35,8 +35,9 @@ jobs:
           docker pull ${{ env.NGINX_IMAGE }} || true
 
       - name: Build images
+        id: build-images
         run: |
-          docker-compose -f docker-compose.ci.yml build
+          docker-compose -f docker-compose.ci.yml build 2>error >&1
 
       - name: Push images
         run: |
