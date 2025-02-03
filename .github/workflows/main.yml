@@ -1,9 +1,8 @@
 name: Continuous Integration and Delivery
 
 on:
-  [push]
-  # push:
-  #   branches: [main]
+  push:
+    branches: [main]
 
 env:
   #
@@ -38,7 +37,7 @@ jobs:
       - name: Build images
         id: build-images
         run: |
-          docker-compose -f docker-compose.ci.yml build 2>error >&1
+          docker compose -f docker-compose.ci.yml build 2>error >&1
 
       - name: create an issue
         if: ${{ failure() }}
